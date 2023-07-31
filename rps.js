@@ -46,12 +46,22 @@ function decide_winner(player, comp) {
 }
 
 function print_outcome(outcome, player, comp) {
+
+    
     switch(outcome){
-        case 'win' : console.log(`You win! ${player.toUpperCase()} beats ${comp.toUpperCase()}`); break;
-        case 'lose' : console.log(`You lose! ${comp.toUpperCase()} beats ${player.toUpperCase()}`); break;
-        case 'tie' : console.log(`Tie! ${player.toUpperCase()} ties ${comp.toUpperCase()}`); break;
+        case 'win' : document.querySelector('#status').textContent = `You win! ${player.toUpperCase()} beats ${comp.toUpperCase()}`; break;
+        case 'lose' : document.querySelector('#status').textContent = `You lose! ${comp.toUpperCase()} beats ${player.toUpperCase()}`; break;
+        case 'tie' : document.querySelector('#status').textContent = `Tie! ${player.toUpperCase()} ties ${comp.toUpperCase()}`; break;
     };
+    document.querySelector('div').contentText
 }
 
 
-decide_winner(getPlayerChoice(), getComputerChoice());
+const rock = document.querySelector('#rock');
+rock.addEventListener('click', () => decide_winner('rock', getComputerChoice()));
+
+const paper = document.querySelector('#paper');
+paper.addEventListener('click', () => decide_winner('paper', getComputerChoice()));
+
+const scissors = document.querySelector('#scissors');
+scissors.addEventListener('click', () => decide_winner('scissors', getComputerChoice()));
