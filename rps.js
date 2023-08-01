@@ -1,3 +1,5 @@
+
+
 function getComputerChoice() {
     let rand_num = Math.floor(Math.random() * 3);
     let decision = '';
@@ -45,16 +47,53 @@ function decide_winner(player, comp) {
     print_outcome(outcome, player, comp);
 }
 
+function resetScore() {
+    compScore = 0;
+    playerScore = 0;
+}
+
+function checkWinner() {
+    if (compScore >= 5) {
+        let loseText = document.querySelector('#status'); 
+        loseText.style = 'color: red; font-size: 18pt;';
+        loseText.textContent = `GAME OVER! Play again?`
+        resetScore();
+    } else if (playerScore >= 5) {
+        let winText = document.querySelector('#status');
+        winText.textContent = `YOU WIN! Congratulations!`;
+        winText.style = 'color: green; font-size: 18pt;';
+        resetScore();
+    }
+}
+
+function updateScore() {
+    document.querySelector('#score').textContent = `SCORE: You: ${playerScore}  Opponent: ${compScore}`
+}
+
 function print_outcome(outcome, player, comp) {
 
-    
+    let text = document.querySelector('#status');
+    text.style = 'color:black;font-size-14pt;'
+    text.textContent = ''
+
     switch(outcome){
-        case 'win' : document.querySelector('#status').textContent = `You win! ${player.toUpperCase()} beats ${comp.toUpperCase()}`; break;
-        case 'lose' : document.querySelector('#status').textContent = `You lose! ${comp.toUpperCase()} beats ${player.toUpperCase()}`; break;
+        case 'win' : document.querySelector('#status').textContent = `You win! ${player.toUpperCase()} beats ${comp.toUpperCase()}`; playerScore++; break;
+        case 'lose' : document.querySelector('#status').textContent = `You lose! ${comp.toUpperCase()} beats ${player.toUpperCase()}`; compScore++; break;
         case 'tie' : document.querySelector('#status').textContent = `Tie! ${player.toUpperCase()} ties ${comp.toUpperCase()}`; break;
     };
-    document.querySelector('div').contentText
+    document.querySelector('div').contentText;
+    updateScore();
+    checkWinner();
 }
+
+
+
+
+
+let playerScore = 0;
+let compScore = 0;
+
+
 
 
 const rock = document.querySelector('#rock');
